@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 IMAGE_TO_GENERATE="core-image-base"
 
@@ -16,13 +16,14 @@ build_repo()
 
 build_image()
 {
-    if [ ! -d "build" ]
-    then
-        echo "### setup build environment ### "
+    echo "### setup build environment ### "
 
-		cp ./../conf/* ./conf
-        source sources/poky/oe-init-build-env
-    fi
+    echo "### remove conf/ contents ###"
+    rm -r conf/*
+
+    cp ./../conf/* ./conf
+
+    source sources/poky/oe-init-build-env
 
 	# echo "### clean sstate:  ### "
     bitbake ${IMAGE_TO_GENERATE} -c cleansstate
@@ -33,5 +34,5 @@ build_image()
 
 
 mkdir -p tmp_yocto
-cd tmp_yocto || exit 1
+cd tmp_yocto
 build_repo && build_image
