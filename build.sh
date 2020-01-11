@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-IMAGE_TO_GENERATE="core-image-base"
+IMAGE_TO_GENERATE="core-image-minimal"
 
 build_repo()
 {
