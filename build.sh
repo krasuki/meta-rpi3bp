@@ -19,8 +19,12 @@ build_image()
     echo "### setup build environment ### "
 
     echo "### remove conf/ contents ###"
-    rm -r conf/*
+    if [ -d "conf" ]
+    then
+        rm -r conf/
+    fi
 
+    mkdir conf/
     cp ./../conf/* ./conf
 
     source sources/poky/oe-init-build-env
@@ -30,6 +34,7 @@ build_image()
 
     # echo "### generate file ### "
 	bitbake ${IMAGE_TO_GENERATE}
+	bitbake ${IMAGE_TO_GENERATE} -c do_populate_sdk
 }
 
 
