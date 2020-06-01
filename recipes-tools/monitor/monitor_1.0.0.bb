@@ -4,6 +4,7 @@ LICENSE = "GPL-3.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 inherit qmake5
+require recipes-qt/qt5/qt5.inc
 
 DEPENDS += "qtbase qtquickcontrols2 qtdeclarative"
 
@@ -12,7 +13,7 @@ SRC_URI = "git://git@github.com/krasuki/rpi-monitoring.git;protocol=ssh;nobranch
 S = "${WORKDIR}/git"
 
 do_install_append() {
-    install -d ${D}/usr/bin/
-    install -m 0755 rpi-monitoring ${D}/usr/bin/
+    install -d ${D}${bindir}
+    install -m 0755 rpi-monitoring ${D}${bindir}
 }
 
